@@ -16,7 +16,7 @@ Given('a capacidade da carroça igual a {int}', function (int) {
 });
 
 Given('a carroça sempre iniciando vazia', function () {
-    carroca.passengers = [];
+    carroca.passengers
 });
 
 Given('o passageiro de nome <name> que está com saúde <isHealthy> e tem <food> refeições', function (dataTable) {
@@ -56,15 +56,15 @@ When('o passageiro {string} tentar subir a bordo', function (string) {
 /** THEN */
 
 Then('responderei que temos {int} refeições', function (int) {
-    assert.strictEqual(totalFood, int);
+    assert.strictEqual(carroca.totalFood(), int);
 });
 
 Then('a resposta deverá ser Não', function () {
-    assert.strictEqual(shouldQuarantine, false);
+    assert.strictEqual(carroca.shouldQuarantine(), false);
 });
 
 Then('a resposta deverá ser Sim', function () {
-    assert.strictEqual(shouldQuarantine, true);
+    assert.strictEqual(carroca.shouldQuarantine(), true);
 });
 
 Then('ele não deverá ser adicionada à lista de passageiros', function () {
@@ -77,15 +77,11 @@ Then('ele não deverá ser adicionada à lista de passageiros', function () {
 Then('ele deverá ser adicionada à lista de passageiros', function () {
     let filter = carroca.passengers.filter(passenger => passenger.name === triedToComeAboard.name);
     let isAboard = filter.length > 0;
-
+    console.log(triedToComeAboard)
+    console.log(carroca.passengers)
     assert.strictEqual(isAboard, true);
 });
 
 Then('devo responder que a quantidade de assentos disponíveis é {int}', function (int) {
-    assert.strictEqual(availableSeat, int);
+    assert.strictEqual(carroca.getAvailableSeatCount(), int);
 });
-
-
-
-
-
